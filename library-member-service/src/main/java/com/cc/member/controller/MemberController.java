@@ -39,6 +39,8 @@ public class MemberController {
 	@PostMapping("/addmember")
 	public ResponseEntity addMember(@RequestBody MemberDto member){
 		
+		Long idMemberCard = memberService.addMember(member);
+		
 		
 		return ResponseEntity.ok(HttpStatus.OK);
 		
