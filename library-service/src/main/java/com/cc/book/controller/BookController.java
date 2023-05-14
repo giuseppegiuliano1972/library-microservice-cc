@@ -49,7 +49,7 @@ public class BookController {
 	        return new ResponseEntity<>(bookId, HttpStatus.CREATED);
 	    }
 	  
-	  @GetMapping("/titolo/{titolo}")
+	  @GetMapping("/lista/{titolo}")
 	  public List<BookDto> getLibroByTitolo(@PathVariable("titolo") String titolo) {
 			
 			List<BookDto> book = bookService.getBookByTitoloLike(titolo);

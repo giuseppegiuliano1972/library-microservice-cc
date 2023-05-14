@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,4 +35,13 @@ public class MemberController {
                 HttpStatus.OK
         );
     }
+	
+	@PostMapping("/addmember")
+	public ResponseEntity addMember(@RequestBody MemberDto member){
+		
+		
+		return ResponseEntity.ok(HttpStatus.OK);
+		
+		
+	}
 }

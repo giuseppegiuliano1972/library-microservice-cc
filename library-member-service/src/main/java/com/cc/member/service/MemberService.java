@@ -9,7 +9,10 @@ import com.cc.member.exception.MemberServiceCustomException;
 import com.cc.member.payload.request.MemberDto;
 import com.cc.member.repository.MemberDao;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class MemberService {
 	
 	@Autowired
@@ -30,7 +33,16 @@ public class MemberService {
 		
 		return dto;
 		
+	}
+	
+	@Transactional
+	public Long addMember(MemberDto dto) {
 		
+		Member member = memberAssembler.NewDtoToDao(dto);
+		
+		memberDao.save(member);
+		
+		return member.getCardId();
 		
 	}
 

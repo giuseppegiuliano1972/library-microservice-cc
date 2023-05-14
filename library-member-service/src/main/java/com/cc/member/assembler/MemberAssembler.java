@@ -1,5 +1,8 @@
 package com.cc.member.assembler;
 
+import java.util.Date;
+import java.util.Random;
+
 import org.springframework.stereotype.Component;
 
 import com.cc.member.domain.Member;
@@ -22,9 +25,26 @@ public class MemberAssembler {
 
 	}
 	
-	public Member DtoToDao(MemberDto book) {
+	public Member DtoToDao(MemberDto dto) {
 		Member dao = new Member();
 		
+		dao.setCodFiscale(dto.getCodFiscale());
+		dao.setCardId(dto.getCardId());
+		
+		return dao;
+
+	}
+	
+	public Member NewDtoToDao(MemberDto dto) {
+		Member dao = new Member();
+		
+		Random rd = new Random();
+		dao.setCodFiscale(dto.getCodFiscale());
+		dao.setCardId(rd.nextLong());
+		dao.setCognome(dto.getCognome());
+		dao.setNome(dto.getNome());
+		dao.setIndirizzo(dao.getIndirizzo());
+		dao.setDateCard(new Date());
 		
 		return dao;
 
