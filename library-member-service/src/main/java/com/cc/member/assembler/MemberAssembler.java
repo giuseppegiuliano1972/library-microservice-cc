@@ -1,5 +1,6 @@
 package com.cc.member.assembler;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.cc.member.domain.Member;
 import com.cc.member.payload.request.MemberDto;
+import com.cc.member.utils.DateUtility;
 
 @Component
 public class MemberAssembler {
@@ -20,6 +22,7 @@ public class MemberAssembler {
 		dto.setNome(member.getNome());
 		dto.setExpirationDate(member.getExpirationDate());
 		dto.setId(member.getId());
+		dto.setUserId(member.getUserid());
 		
 		return dto;
 
@@ -39,14 +42,19 @@ public class MemberAssembler {
 		Member dao = new Member();
 		
 		Random rd = new Random();
-		dao.setCodFiscale(dto.getCodFiscale());
-		dao.setCardId(rd.nextLong());
+		dao.setCodFiscale(dto.getCodFiscale().toUpperCase());
+		dao.setCardId(Math.abs(rd.nextLong()));
 		dao.setCognome(dto.getCognome());
 		dao.setNome(dto.getNome());
 		dao.setIndirizzo(dao.getIndirizzo());
+		dao.setEmail(dto.getEmail());
+		dao.setUserid(dto.getUserId());
 		dao.setDateCard(new Date());
+		dao.setExpirationDate(DateUtility.addYear(dao.getDateCard()));//scadenza tra un anno
 		
 		return dao;
 
 	}
+	
+
 }

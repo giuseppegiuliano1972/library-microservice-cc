@@ -3,6 +3,7 @@ package com.cc.member.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("/member")
+@CrossOrigin
 @Log4j2
 public class MemberController {
 	
@@ -37,13 +39,28 @@ public class MemberController {
     }
 	
 	@PostMapping("/addmember")
-	public ResponseEntity addMember(@RequestBody MemberDto member){
+	public ResponseEntity<HttpStatus> addMember(@RequestBody MemberDto member){
 		
-		Long idMemberCard = memberService.addMember(member);
+		if (member != null) {
+			Long idMemberCard = memberService.addMember(member);
+		} else {
+			log.info("Vuoto");
+		}
 		
 		
 		return ResponseEntity.ok(HttpStatus.OK);
+
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<MemberDto> login (@RequestBody MemberDto member){
+		
+		return new ResponseEntity<>(
+        		memberService.getMemberByUserid(member.getUserId()),
+                HttpStatus.OK
+        );
 		
 		
 	}
+
 }

@@ -43,6 +43,15 @@ public class Member implements Serializable {
 	
 	@Column(name = "scadenza_member")
 	private Date expirationDate;
+	
+	@Column(name = "userid")
+	private String userid;
+	
+	@Column(name = "password")
+	private String password;
+	
+	@Column(name = "email")
+	private String email;
 
 	public Long getId() {
 		return id;
@@ -106,6 +115,30 @@ public class Member implements Serializable {
 
 	public void setCodFiscale(String codFiscale) {
 		this.codFiscale = codFiscale;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

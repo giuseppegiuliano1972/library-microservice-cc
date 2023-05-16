@@ -35,12 +35,34 @@ public class MemberService {
 		
 	}
 	
+public MemberDto getMemberByUserid(String userid) {
+		
+		Member member = memberDao.findByUserid(userid);
+		
+		if (member.getId() == null)	{
+			throw new MemberServiceCustomException("Error: LOGIN FAILED", "MEMBER_NOT_ALLOWED");
+		}
+			
+		MemberDto dto = memberAssembler.DaoToDto(member);
+		
+		return dto;
+		
+	}
+	
 	@Transactional
 	public Long addMember(MemberDto dto) {
 		
-		Member member = memberAssembler.NewDtoToDao(dto);
+		Member member = memberDao.findByCodFiscale(dto.getCodFiscale().toUpperCase());
 		
-		memberDao.save(member);
+		if (member == null) {
+		
+			member = memberAssembler.NewDtoToDao(dto);
+			memberDao.save(member);
+		} else {
+			throw new MemberServiceCustomException("User already exist", "99");
+		}
+		
+		
 		
 		return member.getCardId();
 		
