@@ -1,6 +1,8 @@
 package com.cc.library.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.cc.library.assembler.LendingAssembler;
+import com.cc.library.domain.Lending;
 import com.cc.library.exception.LendingCustomException;
 import com.cc.library.external.client.BookService;
 import com.cc.library.external.client.MemberService;
@@ -61,6 +64,23 @@ public class LendingService {
 		lendingDao.save(lendingAssembler.DtoToDao(lendingDto, book.getBody(), member.getBody()));
 		lend.setStatus("OK");
 		return lend;
+		
+	}
+	
+	public List<LendingDto> getLibriPrestatiByIdMember(Long idMember){
+		
+		List<Lending> lst = lendingDao.findByIdMemberAndReturnDateIsNull(idMember);
+		List<LendingDto> lstdto = new ArrayList<LendingDto>();
+		
+		for (Lending lending : lst) {
+			LendingDto dto = lendingAssembler.DaoToDto(lending);
+			
+			lstdto.add(dto);		
+			
+		}
+		
+		
+		return lstdto;
 		
 	}
 

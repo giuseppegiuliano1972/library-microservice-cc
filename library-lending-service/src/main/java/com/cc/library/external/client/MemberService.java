@@ -11,6 +11,6 @@ import com.cc.library.payload.request.MemberDto;
 @FeignClient(name = "library-member-service")
 public interface MemberService {
 	
-	@GetMapping("/{codFiscale}")
+	@GetMapping("/member/{codFiscale}")
     public ResponseEntity<MemberDto> getMemberDetailsByCodFIscale(@PathVariable String codFiscale);
 }

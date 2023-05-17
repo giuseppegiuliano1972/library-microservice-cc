@@ -1,8 +1,14 @@
 package com.cc.library.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +21,7 @@ import lombok.extern.log4j.Log4j2;
 
 @RestController
 @RequestMapping("/prestito")
+@CrossOrigin
 @Log4j2
 public class LibraryLendingController {
 	
@@ -26,6 +33,15 @@ public class LibraryLendingController {
 
 		LendingDto dto = lendingService.lendBook(lendingDto);
         log.info("Id: {}", lendingDto.getId());
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+	
+	@GetMapping("/lista/{idMember}")
+	public ResponseEntity<List<LendingDto>> getListaLibriPresi(@PathVariable Long idMember) {
+		List<LendingDto> dto = new ArrayList<LendingDto>();
+		
+		dto = lendingService.getLibriPrestatiByIdMember(idMember);
+		
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 

@@ -13,6 +13,10 @@ public class LendingAssembler {
 	public LendingDto DaoToDto(Lending dao) {
 		LendingDto dto = new LendingDto();
 		
+		dto.setDateLending(dao.getDateLending());
+		dto.setIdBook(dao.getIdBook());
+		dto.setIdMember(dao.getIdMember());
+		dto.setReturnDate(dao.getReturnDate());
 		
 		return dto;
 

@@ -18,7 +18,10 @@ public class LendingDto implements Serializable {
 	@JsonProperty("ID_MEMBER")
 	private Long idMember;
 	
-	@JsonProperty("ID_BOOK")
+	@JsonProperty("USERID")
+	private String userid;
+	
+	@JsonProperty("BOOK_ID")
 	private Long idBook;
 	
 	@JsonProperty("DATE_LENDING")
@@ -88,6 +91,14 @@ public class LendingDto implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 
 	@Override

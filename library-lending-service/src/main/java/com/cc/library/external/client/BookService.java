@@ -11,6 +11,6 @@ import com.cc.library.payload.request.BookDto;
 @FeignClient(name = "library-service")
 public interface BookService {
 
-	@GetMapping("/{id}")
+	@GetMapping("/libri/{id}")
     public ResponseEntity<BookDto> getBookById(@PathVariable("id") Long bookId);
 }
