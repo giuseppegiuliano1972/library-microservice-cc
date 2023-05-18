@@ -1,6 +1,5 @@
 package com.cc.member.assembler;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 

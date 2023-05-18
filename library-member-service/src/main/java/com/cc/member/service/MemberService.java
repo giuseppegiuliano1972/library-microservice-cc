@@ -1,5 +1,8 @@
 package com.cc.member.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +35,26 @@ public class MemberService {
 		MemberDto dto = memberAssembler.DaoToDto(member);
 		
 		return dto;
+		
+	}
+	
+	public List<MemberDto> getAllMembers() {
+		
+		List<Member> member = memberDao.findAll();
+		
+			
+		List<MemberDto> lstdto = new ArrayList<MemberDto>();
+		
+		for (Member dao : member) {
+			MemberDto mdto = new MemberDto();
+			mdto = memberAssembler.DaoToDto(dao);
+			
+			lstdto.add(mdto);
+			
+			
+		}
+		
+		return lstdto;
 		
 	}
 	

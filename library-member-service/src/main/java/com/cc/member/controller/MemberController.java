@@ -1,5 +1,9 @@
 package com.cc.member.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +38,25 @@ public class MemberController {
 
         return new ResponseEntity<>(
         		memberService.getMembershipByCodFiscale(codFiscale),
+                HttpStatus.OK
+        );
+    }
+	
+	@GetMapping("/cerca/utenti")
+    public ResponseEntity<List<String>> getAllMembers() {
+
+        List<String> lstNomi = new ArrayList<String>();
+        
+        List<MemberDto> lstdto = memberService.getAllMembers();
+        
+        for (MemberDto memberDto : lstdto) {
+			
+        	lstNomi.add(memberDto.getCognome());
+			
+		}
+        
+        return new ResponseEntity<>(
+        		lstNomi,
                 HttpStatus.OK
         );
     }
