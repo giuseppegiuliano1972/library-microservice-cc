@@ -58,5 +58,14 @@ public class BookController {
 			
 			
 		}
+	  
+	  @GetMapping("/lista/libri")
+	  public ResponseEntity<List<BookDto>> getListaLibri() {
+			
+			List<BookDto> book = bookService.getListaLibriAll();
+			log.info("qui: " + book.toString());
+			
+			return new ResponseEntity<>(book, HttpStatus.OK);
+		}
 
 }

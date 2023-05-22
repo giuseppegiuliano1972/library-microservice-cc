@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,32 @@ public class LibraryLendingController {
 		dto = lendingService.getLibriPrestatiByIdMember(idMember);
 		
         return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+	@GetMapping("/lista/libri/disponibili")
+	public ResponseEntity<List<LendingDto>> getListaLibriDisponibili() {
+		List<LendingDto> dto = new ArrayList<LendingDto>();
+		
+		dto = lendingService.getListaLibriDisponibili();
+		
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+	
+	@GetMapping("/lista/libri/borrowed")
+	public ResponseEntity<List<LendingDto>> getListaLibriBorrowedAll() {
+		List<LendingDto> dto = new ArrayList<LendingDto>();
+		
+		dto = lendingService.getLibriPrestatiAll();
+		
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+	
+	@PutMapping("/libro/return")
+	public ResponseEntity<LendingDto> updateBookReturned(@RequestBody LendingDto lendingDto) {
+				
+		lendingDto = lendingService.updateReturnBook(lendingDto);
+		
+        return new ResponseEntity<>(lendingDto, HttpStatus.OK);
     }
 
 }

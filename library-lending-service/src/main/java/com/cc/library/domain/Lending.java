@@ -34,6 +34,9 @@ public class Lending implements Serializable {
 	
 	@Column(name = "RETURN_DATE")
 	private Date returnDate;
+	
+	@Column(name = "DUE_RETURN_DATE")
+	private Date dueReturnDate;
 
 	public Long getId() {
 		return id;
@@ -73,6 +76,14 @@ public class Lending implements Serializable {
 
 	public void setReturnDate(Date returnDate) {
 		this.returnDate = returnDate;
+	}
+
+	public Date getDueReturnDate() {
+		return dueReturnDate;
+	}
+
+	public void setDueReturnDate(Date dueReturnDate) {
+		this.dueReturnDate = dueReturnDate;
 	}
 	
 	

@@ -24,6 +24,9 @@ public class LendingDto implements Serializable {
 	@JsonProperty("BOOK_ID")
 	private Long idBook;
 	
+	@JsonProperty("TITOLO")
+	private String titolo;
+	
 	@JsonProperty("DATE_LENDING")
 	private Date dateLending;
 	
@@ -35,6 +38,9 @@ public class LendingDto implements Serializable {
 	
 	@JsonProperty("STATUS")
 	private String status;
+	
+	@JsonProperty("DUE_RETURN_DATE")
+	private Date dueReturnDate;
 	
 
 	public Long getId() {
@@ -99,6 +105,24 @@ public class LendingDto implements Serializable {
 
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+
+	
+	
+	public String getTitolo() {
+		return titolo;
+	}
+
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
+	}
+
+	public Date getDueReturnDate() {
+		return dueReturnDate;
+	}
+
+	public void setDueReturnDate(Date dueReturnDate) {
+		this.dueReturnDate = dueReturnDate;
 	}
 
 	@Override

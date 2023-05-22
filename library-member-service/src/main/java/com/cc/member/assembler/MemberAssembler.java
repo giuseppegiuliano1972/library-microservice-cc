@@ -22,6 +22,8 @@ public class MemberAssembler {
 		dto.setExpirationDate(member.getExpirationDate());
 		dto.setId(member.getId());
 		dto.setUserId(member.getUserid());
+		dto.setEmail(member.getEmail());
+		dto.setIndirizzo(member.getIndirizzo());
 		
 		return dto;
 
@@ -45,7 +47,7 @@ public class MemberAssembler {
 		dao.setCardId(Math.abs(rd.nextLong()));
 		dao.setCognome(dto.getCognome());
 		dao.setNome(dto.getNome());
-		dao.setIndirizzo(dao.getIndirizzo());
+		dao.setIndirizzo(dto.getIndirizzo());
 		dao.setEmail(dto.getEmail());
 		dao.setUserid(dto.getUserId());
 		dao.setDateCard(new Date());

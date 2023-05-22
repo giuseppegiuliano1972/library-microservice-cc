@@ -1,5 +1,7 @@
 package com.cc.library.external.client;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,4 +15,7 @@ public interface BookService {
 
 	@GetMapping("/libri/{id}")
     public ResponseEntity<BookDto> getBookById(@PathVariable("id") Long bookId);
+	
+	@GetMapping("/libri/lista/libri")
+	public ResponseEntity<List<BookDto>> getListaLibri();
 }

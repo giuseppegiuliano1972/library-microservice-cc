@@ -56,4 +56,16 @@ public class BookService {
 			return lst;
 		}
 	}
+	
+	public List<BookDto> getListaLibriAll() {
+		
+		List<Book> dao = bookDao.findAll();
+		
+		if (dao == null) {
+			return new ArrayList<BookDto>();
+		}  else {
+			List<BookDto> lst = bookAssembler.DaoToDto(dao);
+			return lst;
+		}
+	}
 }

@@ -1,5 +1,7 @@
 package com.cc.library.assembler;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 
 import com.cc.library.domain.Lending;
@@ -22,6 +24,21 @@ public class LendingAssembler {
 
 	}
 	
+	public LendingDto DaoToEnrichDto(Lending dao, BookDto bDto) {
+		LendingDto dto = new LendingDto();
+		if (dao != null) {
+			dto.setDateLending(dao.getDateLending());
+			dto.setIdBook(dao.getIdBook());
+			dto.setIdMember(dao.getIdMember());
+			dto.setReturnDate(dao.getReturnDate());
+			dto.setDueReturnDate(dao.getDueReturnDate());
+		}
+		dto.setTitolo(bDto.getTitolo());
+		
+		return dto;
+
+	}
+	
 	public Lending DtoToDao(LendingDto dto, BookDto book, MemberDto member) {
 		Lending dao = new Lending();
 		
@@ -29,6 +46,14 @@ public class LendingAssembler {
 		dao.setIdBook(book.getId());
 		dao.setIdMember(member.getId());
 		dao.setReturnDate(dto.getReturnDate());
+		
+		return dao;
+
+	}
+	
+	public Lending updateDtoToDao(Lending dao) {
+		
+		dao.setReturnDate(new Date());
 		
 		return dao;
 

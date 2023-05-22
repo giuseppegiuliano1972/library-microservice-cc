@@ -12,4 +12,8 @@ public interface LendingDao extends JpaRepository <Lending,Long> {
 	
 	public List<Lending> findByIdMemberAndReturnDateIsNull(Long idMember);
 
+	public List<Lending> findByIdBookAndReturnDateIsNotNull(Long idBook);
+	
+	public List<Lending> findByReturnDateIsNull();
+
 }

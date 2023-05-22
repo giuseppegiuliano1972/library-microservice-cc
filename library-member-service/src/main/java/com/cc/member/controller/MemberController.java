@@ -42,8 +42,8 @@ public class MemberController {
         );
     }
 	
-	@GetMapping("/cerca/utenti")
-    public ResponseEntity<List<String>> getAllMembers() {
+	@GetMapping("/lista/utenti")
+    public ResponseEntity<List<MemberDto>> getAllMembers() {
 
         List<String> lstNomi = new ArrayList<String>();
         
@@ -56,7 +56,7 @@ public class MemberController {
 		}
         
         return new ResponseEntity<>(
-        		lstNomi,
+        		lstdto,
                 HttpStatus.OK
         );
     }
