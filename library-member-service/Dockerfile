@@ -8,4 +8,4 @@ EXPOSE 8082
 
 RUN /bin/sh -c  'touch /app.jar'
 
-ENTRYPOINT ["java","-Dspring.datasource.url=jdbc:postgresql://docker-psql/mylibmember","-Dspring.datasource.username=postgres","-Dspring.datasource.password=postgres","-jar","/app.jar"]
+ENTRYPOINT ["java","-Dspring.datasource.url=jdbc:postgresql://library-member-db/mylibmember","-Dspring.datasource.username=postgres","-Dspring.datasource.password=postgres","-jar","/app.jar"]

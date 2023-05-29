@@ -1,33 +1,107 @@
+version: '3.7'
 services:
+  library-db:
+    image: postgres:14.1-alpine
+    container_name: library-db
+    restart: always
+    environment:
+      - POSTGRES_DB=mylibrary
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5433:5432'
+    networks:
+      - backend
+    volumes:
+      - ./postgres-library:/data/postgres
+      - ./sql/create_tab.sql:/docker-entrypoint-initdb.d/create_tab.sql
+    healthcheck:
+      test: exit 0
+
+  library-lending-db:
+    image: postgres:14.1-alpine
+    container_name: library-lending-db
+    restart: always
+    ports:
+      - '5434:5432' # expose ports - HOST:CONTAINER
+    environment:
+      - POSTGRES_DB=myLibLend
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./postgres-lending:/data/postgres
+      - ./sql/create_tab_02.sql:/docker-entrypoint-initdb.d/create_tab_02.sql
+    networks:
+      - backend
+    healthcheck:
+      test: exit 0
+
+  library-member-db:
+    image: postgres:14.1-alpine
+    container_name: library-member-db
+    ports:
+      - '5435:5432' # expose ports - HOST:CONTAINER
+    environment:
+      - POSTGRES_DB=mylibmember
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./postgres-member:/data/postgres
+      - ./sql/create_tab_03.sql:/docker-entrypoint-initdb.d/create_tab_03.sql
+    networks:
+      - backend
+    healthcheck:
+      test: exit 0
+  
+ 
   service-registry:
     image: service-registry:latest
+    container_name: service-registry
+    hostname: service-registry
     ports:
       - "8761:8761"
     networks:
       - backend
-  library-lending-service:
-    image: library-lending-service:latest
-    environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://service-registry:8761/eureka"
-    ports:
-      - "8083:8083"
-    networks:
-      - backend
-  library-member-service:
-    image: library-member-service:latest
-    environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://service-registry:8761/eureka"
-    ports:
-      - "8082:8082"
-    networks:
-      - backend
+
   library-service:
     image: library-service:latest
     environment:
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://service-registry:8761/eureka"
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://library-db:5433/mylibrary
     ports:
       - "8081:8081"
+    depends_on:
+      - library-db
+      - service-registry
     networks:
       - backend
+
+  library-lending-service:
+    image: library-lending-service:latest
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://library-lending-db:5434/myLibLend
+    ports:
+      - "8083:8083"
+    depends_on:
+      - library-lending-db
+      - service-registry
+    networks:
+      - backend
+
+  library-member-service:
+    image: library-member-service:latest
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://service-registry:8761/eureka
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://library-member-db:5435/mylibmember
+    ports:
+      - "8082:8082"
+    depends_on:
+      - library-member-db
+      - service-registry
+    networks:
+      - backend
+
+
 networks:
   backend:
