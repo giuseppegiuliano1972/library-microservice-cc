@@ -6,6 +6,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.cc.library.payload.request.BookDto;
 
@@ -18,4 +20,7 @@ public interface BookService {
 	
 	@GetMapping("/libri/lista/libri")
 	public ResponseEntity<List<BookDto>> getListaLibri();
+	
+	@PutMapping("/update/disponibilita")
+	public ResponseEntity<BookDto> setDisponibilitaLibro(@RequestBody BookDto book);
 }

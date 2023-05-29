@@ -52,6 +52,9 @@ public class Member implements Serializable {
 	
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "tot_book_borrowed")
+	private Long totBookBorrowed;
 
 	public Long getId() {
 		return id;
@@ -139,6 +142,14 @@ public class Member implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Long getTotBookBorrowed() {
+		return totBookBorrowed;
+	}
+
+	public void setTotBookBorrowed(Long totBookBorrowed) {
+		this.totBookBorrowed = totBookBorrowed;
 	}
 	
 	

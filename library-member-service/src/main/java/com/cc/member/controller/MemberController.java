@@ -1,7 +1,6 @@
 package com.cc.member.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +38,16 @@ public class MemberController {
 
         return new ResponseEntity<>(
         		memberService.getMembershipByCodFiscale(codFiscale),
+                HttpStatus.OK
+        );
+    }
+	
+	@GetMapping("/cerca/{id}")
+    public ResponseEntity<MemberDto> getMemberDetailsById(@PathVariable Long id) {
+
+
+        return new ResponseEntity<>(
+        		memberService.getMemberById(id),
                 HttpStatus.OK
         );
     }
@@ -75,6 +85,15 @@ public class MemberController {
 
 	}
 	
+	@PutMapping("/update/totalelibri")
+	public ResponseEntity<Long> updTotLibri (@RequestBody MemberDto member){
+		
+		return new ResponseEntity<>(
+        		memberService.updTotLibri(member),
+                HttpStatus.OK
+        );
+	}
+	
 	@PostMapping("/login")
 	public ResponseEntity<MemberDto> login (@RequestBody MemberDto member){
 		
@@ -82,8 +101,6 @@ public class MemberController {
         		memberService.getMemberByUserid(member.getUserId()),
                 HttpStatus.OK
         );
-		
-		
 	}
 
 }

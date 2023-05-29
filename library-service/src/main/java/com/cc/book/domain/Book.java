@@ -36,6 +36,9 @@ public class Book implements Serializable{
 	
 	@Column(name = "descrizione")
 	private String descrizione;
+	
+	@Column(name = "available")
+	private Long disponibile; //0 -> Non disponibile; 1 -> disponibile
 
 	public Long getId() {
 		return id;
@@ -83,6 +86,14 @@ public class Book implements Serializable{
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+
+	public Long getDisponibile() {
+		return disponibile;
+	}
+
+	public void setDisponibile(Long disponibile) {
+		this.disponibile = disponibile;
 	}
 
 	@Override

@@ -8,8 +8,8 @@
 		<version>3.0.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.cc.library</groupId>
-	<artifactId>com.cc</artifactId>
+	<groupId>com.ls.library</groupId>
+	<artifactId>com.ls</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>library-lending</name>
 	<description>service to place book lending</description>

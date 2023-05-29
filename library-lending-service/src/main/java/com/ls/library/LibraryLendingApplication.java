@@ -1,4 +1,4 @@
-package com.cc.library;
+package com.ls.library;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.ImportAutoConfiguration;

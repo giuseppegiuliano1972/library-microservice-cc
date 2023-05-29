@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.cc.library.assembler.LendingAssembler;
@@ -46,7 +47,7 @@ public class LendingService {
 		
 		ResponseEntity<BookDto> book = bookService.getBookById(lendingDto.getIdBook());
 		
-		if (book.getBody().getId() == null) {
+		if ((book.getBody().getId() == null) || (book.getBody().getDisponibile() == 1L)) {
 			lend.setStatus("LEND_ERROR");
 			throw new LendingCustomException("Book not found", "BOOK_NOT_FOUND", 1);
 		}
@@ -61,7 +62,12 @@ public class LendingService {
 			throw new LendingCustomException("Membership has expired", "MEMBER_EXPIRED", 3);
 		}
 		
+		ResponseEntity<BookDto> bookRet = bookService.setDisponibilitaLibro(book.getBody());
+		
+		ResponseEntity<Long> Long = memberService.updTotLibri(member.getBody());
+		
 		lendingDao.save(lendingAssembler.DtoToDao(lendingDto, book.getBody(), member.getBody()));
+		
 		lend.setStatus("OK");
 		return lend;
 		
@@ -82,6 +88,9 @@ public class LendingService {
 		Lending lendDao = lendingDao.findById(lendingDto.getId()).orElse(null);
 		
 		lendingDao.save(lendingAssembler.updateDtoToDao(lendDao));
+		
+		ResponseEntity<BookDto> bookRet = bookService.setDisponibilitaLibro(book.getBody());
+		
 		lend.setStatus("OK");
 		return lend;
 		
@@ -115,7 +124,10 @@ public class LendingService {
 				ResponseEntity<BookDto> book = bookService.getBookById(lending.getIdBook());
 				
 				if (book != null) {
-					lenddto = lendingAssembler.DaoToEnrichDto(lending, book.getBody());
+					
+					ResponseEntity<MemberDto> member = memberService.getMemberDetailsById(lending.getIdMember());
+					
+					lenddto = lendingAssembler.DaoToEnrichDto(lending, book.getBody(), member.getBody());
 					
 					lstdto.add(lenddto);
 				}
@@ -133,17 +145,25 @@ public class LendingService {
 		ResponseEntity<List<BookDto>> book = bookService.getListaLibri();
 		
 		List<LendingDto> lstdto = new ArrayList<LendingDto>();
+		Boolean found = false;
 		
 		if (book.getBody() != null ) {
 			LendingDto lenddto = new LendingDto();
+			
+			List<Lending> lst = lendingDao.findByReturnDateIsNull();
+			
 			for (BookDto dto : book.getBody()) {
-				List<Lending> lst = lendingDao.findByIdBookAndReturnDateIsNotNull(dto.getId());
-				if (lst != null && lst.size()>0) {
-					lenddto = lendingAssembler.DaoToEnrichDto(lst.get(0), dto);
-				} else {
-					lenddto = lendingAssembler.DaoToEnrichDto(null, dto);
+				//List<Lending> lst = lendingDao.findByIdBookAndReturnDateIsNull(dto.getId());
+				for (Lending lending : lst) {
+					if (lending.getIdBook().equals(dto.getId())){
+						found=true;
+					}
 				}
-				
+				if (!found) {
+					lenddto = lendingAssembler.DaoToEnrichDto(null, dto, null);
+				} else {
+					found = false;
+				}
 				lstdto.add(lenddto);
 			}
 		}

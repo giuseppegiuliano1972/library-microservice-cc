@@ -66,7 +66,7 @@ public class LibraryLendingController {
 	
 	@PutMapping("/libro/return")
 	public ResponseEntity<LendingDto> updateBookReturned(@RequestBody LendingDto lendingDto) {
-				
+		log.info("quiiiii");
 		lendingDto = lendingService.updateReturnBook(lendingDto);
 		
         return new ResponseEntity<>(lendingDto, HttpStatus.OK);

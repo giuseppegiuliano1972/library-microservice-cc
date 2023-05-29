@@ -24,7 +24,7 @@ public class LendingAssembler {
 
 	}
 	
-	public LendingDto DaoToEnrichDto(Lending dao, BookDto bDto) {
+	public LendingDto DaoToEnrichDto(Lending dao, BookDto bDto, MemberDto mDto) {
 		LendingDto dto = new LendingDto();
 		if (dao != null) {
 			dto.setDateLending(dao.getDateLending());
@@ -32,6 +32,15 @@ public class LendingAssembler {
 			dto.setIdMember(dao.getIdMember());
 			dto.setReturnDate(dao.getReturnDate());
 			dto.setDueReturnDate(dao.getDueReturnDate());
+			dto.setId(dao.getId());
+		} else {
+			dto.setIdBook(bDto.getId());
+		}
+		
+		if (mDto != null) {
+			dto.setCognomeMember(mDto.getCognome());
+			dto.setNomeMember(mDto.getNome());
+			dto.setIdCard(mDto.getCardId());
 		}
 		dto.setTitolo(bDto.getTitolo());
 		

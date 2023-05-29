@@ -25,10 +25,16 @@ public class BookAssembler {
 	public Book DtoToDao(BookDto book) {
 		Book dao = new Book();
 		
+		if (book.getId() != null) {
+			dao.setId(book.getId());
+		}
 		dao.setTitolo(book.getTitolo());
 		dao.setAutore(book.getEditore());
 		dao.setDescrizione(book.getDescrizione());
 		
+		if (book.getDisponibile() == null) {
+			dao.setDisponibile(1L);
+		}
 		return dao;
 
 	}
@@ -49,5 +55,15 @@ public class BookAssembler {
 		
 		return lst;
 		
+	}
+	
+	public Book UpdateDtoToDao(BookDto book, Book dao) {
+		Long disponibile = dao.getDisponibile() == 0L ? 1L : 0L;
+		dao.setTitolo(book.getTitolo());
+		dao.setAutore(book.getEditore());
+		dao.setDescrizione(book.getDescrizione());
+		dao.setDisponibile(disponibile);
+		return dao;
+
 	}
 }

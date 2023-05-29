@@ -8,8 +8,8 @@
 		<version>3.0.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.cc.member</groupId>
-	<artifactId>com.cc</artifactId>
+	<groupId>com.ms.member</groupId>
+	<artifactId>com.ms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>library-member-service</name>
 	<description>service to add or check membership</description>
@@ -68,5 +68,6 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 
 </project>

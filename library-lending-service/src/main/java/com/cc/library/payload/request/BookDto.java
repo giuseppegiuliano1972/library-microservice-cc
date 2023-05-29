@@ -25,6 +25,9 @@ private static final long serialVersionUID = 2825762375681813104L;
 	
 	@JsonProperty("DESCRIZIONE")
 	private String descrizione;
+	
+	@JsonProperty("DISPONIBILE")
+	private Long disponibile;
 
 	public Long getId() {
 		return id;
@@ -72,6 +75,14 @@ private static final long serialVersionUID = 2825762375681813104L;
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+
+	public Long getDisponibile() {
+		return disponibile;
+	}
+
+	public void setDisponibile(Long disponibile) {
+		this.disponibile = disponibile;
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import com.cc.book.exception.BookCustomException;
 import com.cc.book.payload.request.BookDto;
 import com.cc.book.repository.BookDao;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
 
 @Service
@@ -67,5 +68,19 @@ public class BookService {
 			List<BookDto> lst = bookAssembler.DaoToDto(dao);
 			return lst;
 		}
+	}
+	
+	@Transactional
+	public BookDto updateDispon(BookDto book) {
+		
+		Book dao = bookDao.findById(book.getId()).orElseThrow(
+				  () -> new BookCustomException("Book with given Id not found","BOOK_NOT_FOUND"));
+
+		Book daoToUpd = bookAssembler.UpdateDtoToDao(book, dao);
+		
+		bookDao.save(daoToUpd);
+		
+		return book;
+		
 	}
 }

@@ -1,4 +1,4 @@
-package com.cc.library;
+package com.ls.library;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

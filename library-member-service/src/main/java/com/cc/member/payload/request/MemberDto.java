@@ -46,7 +46,10 @@ public class MemberDto implements Serializable {
 	
 	@JsonProperty("EMAIL")
 	private String email;
-
+	
+	@JsonProperty("TOT_BOOK_BORROWED")
+	private Long totBookBorrowed;
+	
 	public Long getId() {
 		return id;
 	}
@@ -133,6 +136,14 @@ public class MemberDto implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Long getTotBookBorrowed() {
+		return totBookBorrowed;
+	}
+
+	public void setTotBookBorrowed(Long totBookBorrowed) {
+		this.totBookBorrowed = totBookBorrowed;
 	}
 
 	@Override

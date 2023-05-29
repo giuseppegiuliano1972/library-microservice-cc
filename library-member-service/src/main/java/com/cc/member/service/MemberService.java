@@ -58,12 +58,26 @@ public class MemberService {
 		
 	}
 	
-public MemberDto getMemberByUserid(String userid) {
+	public MemberDto getMemberByUserid(String userid) {
 		
 		Member member = memberDao.findByUserid(userid);
 		
 		if (member.getId() == null)	{
 			throw new MemberServiceCustomException("Error: LOGIN FAILED", "MEMBER_NOT_ALLOWED");
+		}
+			
+		MemberDto dto = memberAssembler.DaoToDto(member);
+		
+		return dto;
+		
+	}
+	
+	public MemberDto getMemberById(Long id) {
+		
+		Member member = memberDao.findById(id).orElse(null);
+		
+		if (member.getId() == null)	{
+			throw new MemberServiceCustomException("Error: LOGIN FAILED", "MEMBER_NOT_FOUND");
 		}
 			
 		MemberDto dto = memberAssembler.DaoToDto(member);
@@ -88,6 +102,20 @@ public MemberDto getMemberByUserid(String userid) {
 		
 		
 		return member.getCardId();
+		
+	}
+	
+	@Transactional
+	public Long updTotLibri(MemberDto dto) {
+		
+		Member member = memberDao.findById(dto.getId()).orElseThrow(() -> {
+				throw new MemberServiceCustomException("User doesn't exist", "99");
+		});
+		
+		member.setTotBookBorrowed(member.getTotBookBorrowed() + 1); 
+		memberDao.save(member);
+		
+		return member.getTotBookBorrowed();
 		
 	}
 

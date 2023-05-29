@@ -42,6 +42,14 @@ public class LendingDto implements Serializable {
 	@JsonProperty("DUE_RETURN_DATE")
 	private Date dueReturnDate;
 	
+	@JsonProperty("COGNOME_MEMBER")
+	private String cognomeMember;
+
+	@JsonProperty("NOME_MEMBER")
+	private String nomeMember;
+
+	@JsonProperty("ID_CARD")
+	private Long idCard;
 
 	public Long getId() {
 		return id;
@@ -123,6 +131,30 @@ public class LendingDto implements Serializable {
 
 	public void setDueReturnDate(Date dueReturnDate) {
 		this.dueReturnDate = dueReturnDate;
+	}
+
+	public String getCognomeMember() {
+		return cognomeMember;
+	}
+
+	public void setCognomeMember(String cognomeMember) {
+		this.cognomeMember = cognomeMember;
+	}
+
+	public String getNomeMember() {
+		return nomeMember;
+	}
+
+	public void setNomeMember(String nomeMember) {
+		this.nomeMember = nomeMember;
+	}
+
+	public Long getIdCard() {
+		return idCard;
+	}
+
+	public void setIdCard(Long idCard) {
+		this.idCard = idCard;
 	}
 
 	@Override
