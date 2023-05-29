@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ms.member</groupId>
-	<artifactId>com.ms</artifactId>
+	<artifactId>library-member-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>library-member-service</name>
 	<description>service to add or check membership</description>

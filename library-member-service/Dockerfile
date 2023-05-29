@@ -1,8 +1,11 @@
 FROM openjdk:17-alpine
 
+VOLUME /tmp
+
+ADD /target/library-member-service-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8082
 
-ADD target/com.ms-0.0.1-SNAPSHOT.jar library-member-service.jar
+RUN /bin/sh -c  'touch /app.jar'
 
-ENTRYPOINT ["java","-jar","library-member-service.jar"]
+ENTRYPOINT ["java","-Dspring.datasource.url=jdbc:postgresql://docker-psql/mylibmember","-Dspring.datasource.username=postgres","-Dspring.datasource.password=postgres","-jar","/app.jar"]

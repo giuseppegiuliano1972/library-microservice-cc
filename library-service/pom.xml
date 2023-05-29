@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cc.book</groupId>
-	<artifactId>com.cc</artifactId>
+	<artifactId>library-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>library-service</name>
 	<description>service to add or check books</description>

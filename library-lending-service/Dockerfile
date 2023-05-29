@@ -1,11 +1,16 @@
 FROM openjdk:17-alpine
 
+VOLUME /tmp
+
+ADD /target/library-lending-service-0.0.1-SNAPSHOT.jar app.jar
 
 EXPOSE 8083
 
-ADD target/com.ls-0.0.1-SNAPSHOT.jar com.ls-0.0.1-SNAPSHOT.jar
+RUN /bin/sh  -c 'touch /app.jar'
 
-ENTRYPOINT ["java","-jar","com.ls-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-Dspring.datasource.url=jdbc:postgresql://docker-psql/myLibLend","-Dspring.datasource.username=postgres","-Dspring.datasource.password=postgres","-jar","/app.jar"]
+
+#spring.datasource.url=jdbc:postgresql://192.168.1.23:5432/myLibLend
  # Refer to Maven build -> finalName
  #ARG JAR_FILE=target/com.ls-0.0.1-SNAPSHOT.jar
  

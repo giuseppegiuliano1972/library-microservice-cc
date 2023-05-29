@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.ls.library</groupId>
-	<artifactId>com.ls</artifactId>
+	<artifactId>library-lending-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>library-lending</name>
 	<description>service to place book lending</description>

@@ -1,0 +1,33 @@
+services:
+  service-registry:
+    image: service-registry:latest
+    ports:
+      - "8761:8761"
+    networks:
+      - backend
+  library-lending-service:
+    image: library-lending-service:latest
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://service-registry:8761/eureka"
+    ports:
+      - "8083:8083"
+    networks:
+      - backend
+  library-member-service:
+    image: library-member-service:latest
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://service-registry:8761/eureka"
+    ports:
+      - "8082:8082"
+    networks:
+      - backend
+  library-service:
+    image: library-service:latest
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://service-registry:8761/eureka"
+    ports:
+      - "8081:8081"
+    networks:
+      - backend
+networks:
+  backend:
