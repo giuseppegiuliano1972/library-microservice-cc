@@ -49,6 +49,7 @@ public class BookAssembler {
 			dto.setAnno(book.getAnno());
 			dto.setAutore(book.getAutore());
 			dto.setDescrizione(book.getDescrizione());
+			dto.setDisponibile(book.getDisponibile());
 			
 			lst.add(dto);
 		}
