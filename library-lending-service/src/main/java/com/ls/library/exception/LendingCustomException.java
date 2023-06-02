@@ -1,4 +1,4 @@
-package com.cc.library.exception;
+package com.ls.library.exception;
 
 public class LendingCustomException extends RuntimeException{
 

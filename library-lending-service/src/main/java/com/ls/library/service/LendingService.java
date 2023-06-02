@@ -1,4 +1,4 @@
-package com.cc.library.service;
+package com.ls.library.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,15 +10,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
-import com.cc.library.assembler.LendingAssembler;
-import com.cc.library.domain.Lending;
-import com.cc.library.exception.LendingCustomException;
-import com.cc.library.external.client.BookService;
-import com.cc.library.external.client.MemberService;
-import com.cc.library.payload.request.BookDto;
-import com.cc.library.payload.request.LendingDto;
-import com.cc.library.payload.request.MemberDto;
-import com.cc.library.repository.LendingDao;
+import com.ls.library.assembler.LendingAssembler;
+import com.ls.library.domain.Lending;
+import com.ls.library.exception.LendingCustomException;
+import com.ls.library.external.client.BookService;
+import com.ls.library.external.client.MemberService;
+import com.ls.library.payload.request.BookDto;
+import com.ls.library.payload.request.LendingDto;
+import com.ls.library.payload.request.MemberDto;
+import com.ls.library.repository.LendingDao;
 
 import jakarta.transaction.Transactional;
 
@@ -47,7 +47,7 @@ public class LendingService {
 		
 		ResponseEntity<BookDto> book = bookService.getBookById(lendingDto.getIdBook());
 		
-		if ((book.getBody().getId() == null) || (book.getBody().getDisponibile() == 1L)) {
+		if ((book.getBody().getId() == null) || (book.getBody().getDisponibile() == 0L)) {
 			lend.setStatus("LEND_ERROR");
 			throw new LendingCustomException("Book not found", "BOOK_NOT_FOUND", 1);
 		}
@@ -110,6 +110,21 @@ public class LendingService {
 		
 		
 		return lstdto;
+		
+	}
+	public LendingDto getInfoPrestatoByIdBook(Long idBook) {
+		LendingDto lenddto = new LendingDto();
+		Lending lend = lendingDao.findByIdBookAndReturnDateNull(idBook);
+		
+		if (lend == null) {
+			lenddto.setStatus("LEND_ERROR");
+			throw new LendingCustomException("Book not found", "BOOK_NOT_FOUND", 1);
+		} else {
+			lenddto = lendingAssembler.DaoToDto(lend);
+		}
+		
+		
+		return lenddto;
 		
 	}
 	

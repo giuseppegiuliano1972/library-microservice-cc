@@ -1,4 +1,4 @@
-package com.cc.library.external.client;
+package com.ls.library.external.client;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.cc.library.payload.request.BookDto;
+import com.ls.library.payload.request.BookDto;
 
 
 @FeignClient(name = "library-service")
@@ -21,6 +21,6 @@ public interface BookService {
 	@GetMapping("/libri/lista/libri")
 	public ResponseEntity<List<BookDto>> getListaLibri();
 	
-	@PutMapping("/update/disponibilita")
+	@PutMapping("/libri/update/disponibilita")
 	public ResponseEntity<BookDto> setDisponibilitaLibro(@RequestBody BookDto book);
 }

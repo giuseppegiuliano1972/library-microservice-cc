@@ -11,7 +11,7 @@
 	<groupId>com.ls.library</groupId>
 	<artifactId>library-lending-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>library-lending</name>
+	<name>library-lending-service</name>
 	<description>service to place book lending</description>
 	<properties>
 		<java.version>17</java.version>

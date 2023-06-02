@@ -1,13 +1,13 @@
-package com.cc.library.assembler;
+package com.ls.library.assembler;
 
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
-import com.cc.library.domain.Lending;
-import com.cc.library.payload.request.BookDto;
-import com.cc.library.payload.request.LendingDto;
-import com.cc.library.payload.request.MemberDto;
+import com.ls.library.domain.Lending;
+import com.ls.library.payload.request.BookDto;
+import com.ls.library.payload.request.LendingDto;
+import com.ls.library.payload.request.MemberDto;
 
 @Component
 public class LendingAssembler {
@@ -19,6 +19,7 @@ public class LendingAssembler {
 		dto.setIdBook(dao.getIdBook());
 		dto.setIdMember(dao.getIdMember());
 		dto.setReturnDate(dao.getReturnDate());
+		dto.setId(dao.getId());
 		
 		return dto;
 
@@ -54,7 +55,8 @@ public class LendingAssembler {
 		dao.setDateLending(dto.getDateLending());
 		dao.setIdBook(book.getId());
 		dao.setIdMember(member.getId());
-		dao.setReturnDate(dto.getReturnDate());
+		dao.setReturnDate(null);
+		dao.setDueReturnDate(dto.getDueReturnDate());
 		
 		return dao;
 

@@ -1,4 +1,4 @@
-package com.cc.library.payload.request;
+package com.ls.library.payload.request;
 
 import java.io.Serializable;
 

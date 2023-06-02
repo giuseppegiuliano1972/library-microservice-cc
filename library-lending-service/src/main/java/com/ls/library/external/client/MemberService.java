@@ -1,4 +1,4 @@
-package com.cc.library.external.client;
+package com.ls.library.external.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.cc.library.payload.request.MemberDto;
+import com.ls.library.payload.request.MemberDto;
 
 
 @FeignClient(name = "library-member-service")
@@ -21,4 +21,5 @@ public interface MemberService {
 	
 	@PutMapping("/member/update/totalelibri")
 	public ResponseEntity<Long> updTotLibri (@RequestBody MemberDto member);
+
 }

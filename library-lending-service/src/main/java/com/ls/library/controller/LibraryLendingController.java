@@ -1,4 +1,4 @@
-package com.cc.library.controller;
+package com.ls.library.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cc.library.payload.request.LendingDto;
-import com.cc.library.service.LendingService;
+import com.ls.library.payload.request.LendingDto;
+import com.ls.library.service.LendingService;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -70,6 +70,15 @@ public class LibraryLendingController {
 		lendingDto = lendingService.updateReturnBook(lendingDto);
 		
         return new ResponseEntity<>(lendingDto, HttpStatus.OK);
+    }
+	
+	@GetMapping("/info/{id}")
+	public ResponseEntity<LendingDto> getInfoBorrowedByIdBook(@PathVariable Long id) {
+		LendingDto dto = new LendingDto();
+		
+		dto = lendingService.getInfoPrestatoByIdBook(id);
+		
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
 }

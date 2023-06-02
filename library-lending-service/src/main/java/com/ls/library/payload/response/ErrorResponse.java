@@ -1,4 +1,4 @@
-package com.cc.library.payload.response;
+package com.ls.library.payload.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
