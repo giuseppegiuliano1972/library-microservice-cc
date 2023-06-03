@@ -72,16 +72,16 @@ public class MemberController {
     }
 	
 	@PostMapping("/addmember")
-	public ResponseEntity<HttpStatus> addMember(@RequestBody MemberDto member){
-		
+	public ResponseEntity<Long> addMember(@RequestBody MemberDto member){
+		Long idMemberCard = 0L;
 		if (member != null) {
-			Long idMemberCard = memberService.addMember(member);
+			idMemberCard = memberService.addMember(member);
 		} else {
 			log.info("Vuoto");
 		}
 		
 		
-		return ResponseEntity.ok(HttpStatus.OK);
+		return new ResponseEntity<>(idMemberCard, HttpStatus.OK);
 
 	}
 	
@@ -94,13 +94,6 @@ public class MemberController {
         );
 	}
 	
-	@PostMapping("/login")
-	public ResponseEntity<MemberDto> login (@RequestBody MemberDto member){
-		
-		return new ResponseEntity<>(
-        		memberService.getMemberByUserid(member.getUserId()),
-                HttpStatus.OK
-        );
-	}
+
 
 }

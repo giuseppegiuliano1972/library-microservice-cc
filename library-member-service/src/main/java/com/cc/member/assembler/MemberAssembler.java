@@ -52,6 +52,7 @@ public class MemberAssembler {
 		dao.setUserid(dto.getUserId());
 		dao.setDateCard(new Date());
 		dao.setExpirationDate(DateUtility.addYear(dao.getDateCard()));//scadenza tra un anno
+		dao.setTotBookBorrowed(0L);
 		
 		return dao;
 

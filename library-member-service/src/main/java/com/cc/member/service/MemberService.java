@@ -112,6 +112,9 @@ public class MemberService {
 				throw new MemberServiceCustomException("User doesn't exist", "99");
 		});
 		
+		if (member.getTotBookBorrowed() == null) {
+			member.setTotBookBorrowed(0L);
+		}
 		member.setTotBookBorrowed(member.getTotBookBorrowed() + 1); 
 		memberDao.save(member);
 		
