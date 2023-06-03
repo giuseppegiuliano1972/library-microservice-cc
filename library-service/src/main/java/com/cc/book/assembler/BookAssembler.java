@@ -17,7 +17,7 @@ public class BookAssembler {
 		dto.setTitolo(book.getTitolo());
 		dto.setAutore(book.getEditore());
 		dto.setDescrizione(book.getDescrizione());
-		
+		dto.setDisponibile(book.getDisponibile());	
 		return dto;
 
 	}
@@ -33,7 +33,7 @@ public class BookAssembler {
 		dao.setDescrizione(book.getDescrizione());
 		
 		if (book.getDisponibile() == null) {
-			dao.setDisponibile(1L);
+			dao.setDisponibile(0L);
 		}
 		return dao;
 
@@ -60,9 +60,7 @@ public class BookAssembler {
 	
 	public Book UpdateDtoToDao(BookDto book, Book dao) {
 		Long disponibile = dao.getDisponibile() == 0L ? 1L : 0L;
-		dao.setTitolo(book.getTitolo());
-		dao.setAutore(book.getEditore());
-		dao.setDescrizione(book.getDescrizione());
+
 		dao.setDisponibile(disponibile);
 		return dao;
 
