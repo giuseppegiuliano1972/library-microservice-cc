@@ -71,6 +71,16 @@ public class MemberController {
         );
     }
 	
+	@GetMapping("/health")
+    public ResponseEntity<Long> getHealth() {
+
+        
+        return new ResponseEntity<>(
+        		1L,
+                HttpStatus.OK
+        );
+    }
+	
 	@PostMapping("/addmember")
 	public ResponseEntity<Long> addMember(@RequestBody MemberDto member){
 		Long idMemberCard = 0L;

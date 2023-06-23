@@ -8,10 +8,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignAutoConfiguration;
 
 
-@ImportAutoConfiguration({FeignAutoConfiguration.class})
+//@ImportAutoConfiguration({FeignAutoConfiguration.class})
 @SpringBootApplication
-@EnableFeignClients
-@EnableDiscoveryClient
+//@EnableFeignClients
+//@EnableDiscoveryClient
 public class LibraryAuthApplication {
 
 	public static void main(String[] args) {

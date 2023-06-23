@@ -8,4 +8,4 @@ EXPOSE 8082
 
 RUN /bin/sh -c  'touch /app.jar'
 
-ENTRYPOINT ["java","-Dspring.datasource.url=jdbc:postgresql://library-member-db/mylibmember","-Dspring.datasource.username=postgres","-Dspring.datasource.password=postgres","-jar","/app.jar"]
+ENTRYPOINT ["java","-Dspring.datasource.url=jdbc:postgresql://mylibmember.clt6eul6gnxx.eu-north-1.rds.amazonaws.com:5432/mylibmember","-Dspring.datasource.username=postgres","-Dspring.datasource.password=postgres","-jar","/app.jar"]

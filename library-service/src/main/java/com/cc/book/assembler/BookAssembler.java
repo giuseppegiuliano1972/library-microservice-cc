@@ -29,7 +29,9 @@ public class BookAssembler {
 			dao.setId(book.getId());
 		}
 		dao.setTitolo(book.getTitolo());
-		dao.setAutore(book.getEditore());
+		dao.setAutore(book.getAutore());
+		dao.setEditore(book.getEditore());
+		dao.setAnno(book.getAnno());
 		dao.setDescrizione(book.getDescrizione());
 		
 		if (book.getDisponibile() == null) {

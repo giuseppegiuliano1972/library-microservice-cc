@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ls.library.payload.request.LendingDto;
+import com.ls.library.payload.response.ResponseHandler;
 import com.ls.library.service.LendingService;
 
 import lombok.extern.log4j.Log4j2;
@@ -29,12 +30,18 @@ public class LibraryLendingController {
 	@Autowired
 	private LendingService lendingService;
 	
-	@PostMapping("/esegui")
-    public ResponseEntity<LendingDto> richiediLibro(@RequestBody LendingDto lendingDto) {
+	@PostMapping("/libro/esegui")
+    public ResponseEntity<Object> richiediLibro(@RequestBody LendingDto lendingDto) {
 
-		LendingDto dto = lendingService.lendBook(lendingDto);
-        log.info("Id: {}", lendingDto.getId());
-        return new ResponseEntity<>(dto, HttpStatus.OK);
+		try {
+			LendingDto dto = lendingService.lendBook(lendingDto);
+	        log.info("Id: {}", lendingDto.getId());
+			return ResponseHandler.generateResponse("Successfully added data!", HttpStatus.OK, dto);
+		} catch (Exception e) {
+			return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+		}
+		
+       // return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 	
 	@GetMapping("/lista/{idMember}")
@@ -65,11 +72,16 @@ public class LibraryLendingController {
     }
 	
 	@PutMapping("/libro/return")
-	public ResponseEntity<LendingDto> updateBookReturned(@RequestBody LendingDto lendingDto) {
+	public ResponseEntity<Object> updateBookReturned(@RequestBody LendingDto lendingDto) {
 		log.info("quiiiii");
-		lendingDto = lendingService.updateReturnBook(lendingDto);
 		
-        return new ResponseEntity<>(lendingDto, HttpStatus.OK);
+		try {
+			lendingDto = lendingService.updateReturnBook(lendingDto);
+			return ResponseHandler.generateResponse("Successfully updated data!", HttpStatus.OK, lendingDto);
+		} catch (Exception e) {
+			return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+		}
+        //return new ResponseEntity<>(lendingDto, HttpStatus.OK);
     }
 	
 	@GetMapping("/info/{id}")
@@ -80,5 +92,16 @@ public class LibraryLendingController {
 		
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+	
+	@GetMapping("/health")
+    public ResponseEntity<Long> getHealth() {
+
+        
+        return new ResponseEntity<>(
+        		1L,
+                HttpStatus.OK
+        );
+    }
+	
 
 }

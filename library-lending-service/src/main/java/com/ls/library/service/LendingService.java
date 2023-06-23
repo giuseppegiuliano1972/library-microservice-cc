@@ -83,9 +83,17 @@ public class LendingService {
 		if (book.getBody().getId() == null) {
 			lend.setStatus("LEND_ERROR");
 			throw new LendingCustomException("Book not found", "BOOK_NOT_FOUND", 1);
-		}
+		} else if (book.getBody().getDisponibile() == 1L) {
+			lend.setStatus("RETURN_ERROR");
+			throw new LendingCustomException("Book already returned", "BOOK_returned", 1);
+		} 
 		
 		Lending lendDao = lendingDao.findById(lendingDto.getId()).orElse(null);
+		
+		if (lendDao != null && lendDao.getReturnDate() != null) {
+			lend.setStatus("RET_ERROR");
+			throw new LendingCustomException("Book already returned", "BOOK_returned", 1);
+		}
 		
 		lendingDao.save(lendingAssembler.updateDtoToDao(lendDao));
 		

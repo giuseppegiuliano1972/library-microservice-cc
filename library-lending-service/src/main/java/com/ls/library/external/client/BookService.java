@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.ls.library.payload.request.BookDto;
 
 
-@FeignClient(name = "library-service")
+@FeignClient(name = "library-service", url = "${app.ct.client.bookservice.url}")
 public interface BookService {
 
 	@GetMapping("/libri/{id}")

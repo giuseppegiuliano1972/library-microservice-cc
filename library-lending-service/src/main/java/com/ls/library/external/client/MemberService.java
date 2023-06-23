@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.ls.library.payload.request.MemberDto;
 
 
-@FeignClient(name = "library-member-service")
+@FeignClient(name = "library-member-service", url = "${app.ct.client.memberservice.url}")
 public interface MemberService {
 	
 	@GetMapping("/member/{codFiscale}")
