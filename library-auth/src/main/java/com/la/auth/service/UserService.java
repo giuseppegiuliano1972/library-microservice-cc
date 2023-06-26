@@ -33,5 +33,19 @@ public class UserService {
 		return dto;
 		
 	}
+	
+	public UserDto getUserByUserid(String userid) {
+		
+		User user = userDao.findByUserid(userid);
+		
+		if (user.getId() == null)	{
+			throw new AuthCustomException("Error: LOGIN FAILED", "MEMBER_NOT_ALLOWED");
+		} 
+		
+		UserDto dto = userAssembler.DaoToDto(user);
+		
+		return dto;
+		
+	}
 
 }

@@ -40,8 +40,6 @@ public class LibraryLendingController {
 		} catch (Exception e) {
 			return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
 		}
-		
-       // return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 	
 	@GetMapping("/lista/{idMember}")
