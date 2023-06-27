@@ -18,5 +18,16 @@ public class UserAssembler {
 
 	}
 	
+	public User DtoToDao(UserDto dto) {
+		User dao = new User();
+		
+		dao.setUserid(dto.getUserid());
+		dao.setPassword(dto.getPassword());
+		dao.setEmail(dto.getEmail());
+		dao.setRoles(dto.getRole());
+		return dao;
+
+	}
+	
 	
 }

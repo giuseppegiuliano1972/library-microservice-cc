@@ -1,8 +1,10 @@
 package com.la.auth.payload.request;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.la.auth.domain.Role;
 
 public class UserDto implements Serializable {
 
@@ -16,6 +18,11 @@ public class UserDto implements Serializable {
 	
 	@JsonProperty("PASSWORD")
 	private String password;
+	
+	@JsonProperty("EMAIL")
+	private String email;
+	
+	private Set<Role> role;
 
 	public Long getId() {
 		return id;
@@ -40,6 +47,24 @@ public class UserDto implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Set<Role> getRole() {
+		return role;
+	}
+
+	public void setRole(Set<Role> role) {
+		this.role = role;
+	}
+
+
 	
 
 

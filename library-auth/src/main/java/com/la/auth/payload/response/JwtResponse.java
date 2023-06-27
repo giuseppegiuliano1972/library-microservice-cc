@@ -1,32 +1,38 @@
 package com.la.auth.payload.response;
 
+import java.util.List;
+
 public class JwtResponse {
 	
 	private String token;
 	private String type = "Bearer";
 	private Long id;
-	private String userid;
+	private String username;
+	private String email;
+	private List<String> roles;
 
-	public JwtResponse(String accessToken, Long id, String userid) {
+	public JwtResponse(String accessToken, Long id, String username, String email, List<String> roles) {
 		this.token = accessToken;
 		this.id = id;
-		this.userid = userid;
+		this.username = username;
+		this.email = email;
+		this.roles = roles;
 	}
 
-	public String getToken() {
+	public String getAccessToken() {
 		return token;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
+	public void setAccessToken(String accessToken) {
+		this.token = accessToken;
 	}
 
-	public String getType() {
+	public String getTokenType() {
 		return type;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setTokenType(String tokenType) {
+		this.type = tokenType;
 	}
 
 	public Long getId() {
@@ -37,13 +43,24 @@ public class JwtResponse {
 		this.id = id;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
 	
 }

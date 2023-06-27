@@ -34,17 +34,32 @@ public class UserService {
 		
 	}
 	
-	public UserDto getUserByUserid(String userid) {
+	public UserDto getUserByUserid(String userid, Boolean isNew) {
 		
 		User user = userDao.findByUserid(userid);
 		
-		if (user.getId() == null)	{
+		if (user == null && isNew) {
+			return null;
+		}
+		
+		if (user.getId() == null && !isNew)	{
 			throw new AuthCustomException("Error: LOGIN FAILED", "MEMBER_NOT_ALLOWED");
-		} 
+		} else if (user.getId() == null) {
+			return new UserDto();
+		}
 		
 		UserDto dto = userAssembler.DaoToDto(user);
 		
 		return dto;
+		
+	}
+	
+	public void saveUser(UserDto user) {
+		
+		User dao = userAssembler.DtoToDao(user);
+		
+		userDao.save(dao);
+		
 		
 	}
 
