@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.ls.library.payload.request.MemberDto;
 
@@ -21,5 +22,9 @@ public interface MemberService {
 	
 	@PutMapping("/member/update/totalelibri")
 	public ResponseEntity<Long> updTotLibri (@RequestBody MemberDto member);
+	
+	//test
+	@GetMapping("/member/getgreet")
+    public String getGreetings(@RequestHeader("SERVICE-AUTH-TOKEN") String serviceAuthToken);
 
 }

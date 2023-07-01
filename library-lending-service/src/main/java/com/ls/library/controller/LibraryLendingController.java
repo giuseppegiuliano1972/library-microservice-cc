@@ -101,5 +101,16 @@ public class LibraryLendingController {
         );
     }
 	
+	@GetMapping(value = "/get-greeting-from-service-b")
+	  public ResponseEntity<Object> getGreetingFromServiceB() {
+	    try {
+	     	      
+	      String ret = lendingService.getGreetings();
+	      return ResponseHandler.generateResponse("Successfully updated data!", HttpStatus.OK, ret);
+	    } catch (Exception e) {
+			return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+		}
+	  }
+	
 
 }

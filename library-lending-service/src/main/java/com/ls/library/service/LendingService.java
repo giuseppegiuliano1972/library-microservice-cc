@@ -7,10 +7,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.ls.library.assembler.LendingAssembler;
+import com.ls.library.config.ServiceAuthConfig;
 import com.ls.library.domain.Lending;
 import com.ls.library.exception.LendingCustomException;
 import com.ls.library.external.client.BookService;
@@ -20,9 +20,12 @@ import com.ls.library.payload.request.LendingDto;
 import com.ls.library.payload.request.MemberDto;
 import com.ls.library.repository.LendingDao;
 
+import feign.FeignException;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class LendingService {
 	
 	@Autowired
@@ -39,6 +42,9 @@ public class LendingService {
 	
 	@Autowired
 	private LendingAssembler lendingAssembler;
+	
+	@Autowired 
+	private ServiceAuthConfig serviceAuthConfig;
 	
 	@Transactional
 	public LendingDto lendBook(LendingDto lendingDto) {
@@ -192,6 +198,41 @@ public class LendingService {
 		}
 		
 		return lstdto;
+		
+	}
+	
+	public String getGreetings() {
+		
+		 try {
+		      String serviceBGreetingResponse =
+		    		  memberService.getGreetings(serviceAuthConfig.getServiceBAuthToken());
+
+		      return serviceBGreetingResponse;
+		      
+		      
+		    } catch (FeignException exception) { 
+		      /*
+		        Extract the error thrown from service B 
+		        and if the error is `INVALID_TOKEN`, then return 401
+		       */
+		      String error = new String(exception.responseBody().get().array());
+		      log.error("Error {}", error);
+		      if ("INVALID_TOKEN".equals(error)) {
+		        return error;
+		      }
+		      throw exception;
+		    } catch (Exception ex) { 
+		      /*
+		        Extract the error thrown from service B 
+		        and if the error is `INVALID_TOKEN`, then return 401
+		       */
+		      String error = ex.getMessage();
+		      log.error("Error {}", error);
+		      if ("INVALID_TOKEN".equals(error)) {
+		        return error;
+		      }
+		      throw ex;
+		    } 
 		
 	}
 
