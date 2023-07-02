@@ -15,13 +15,13 @@ import com.ls.library.payload.request.MemberDto;
 public interface MemberService {
 	
 	@GetMapping("/member/{codFiscale}")
-    public ResponseEntity<MemberDto> getMemberDetailsByCodFIscale(@PathVariable String codFiscale);
+    public ResponseEntity<MemberDto> getMemberDetailsByCodFIscale(@PathVariable String codFiscale, @RequestHeader("SERVICE-AUTH-TOKEN") String serviceAuthToken);
 	
 	@GetMapping("/member/cerca/{id}")
-    public ResponseEntity<MemberDto> getMemberDetailsById(@PathVariable Long id);
+    public ResponseEntity<MemberDto> getMemberDetailsById( @PathVariable Long id);
 	
 	@PutMapping("/member/update/totalelibri")
-	public ResponseEntity<Long> updTotLibri (@RequestBody MemberDto member);
+	public ResponseEntity<Long> updTotLibri ( @RequestBody MemberDto member, @RequestHeader("SERVICE-AUTH-TOKEN") String serviceAuthToken);
 	
 	//test
 	@GetMapping("/member/getgreet")

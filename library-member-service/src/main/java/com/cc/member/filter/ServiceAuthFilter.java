@@ -1,8 +1,11 @@
 package com.cc.member.filter;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -21,6 +24,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Order(Ordered.HIGHEST_PRECEDENCE)
 @Slf4j
 public class ServiceAuthFilter implements Filter {
 
@@ -33,7 +37,13 @@ public class ServiceAuthFilter implements Filter {
       throws IOException, ServletException {
 
     HttpServletRequest httpServletRequest = ((HttpServletRequest) servletRequest);
+    HttpServletResponse response = ((HttpServletResponse) servletResponse);
+   
+    Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
     String serviceAuthToken = httpServletRequest.getHeader("SERVICE-AUTH-TOKEN");
+    String authToken = httpServletRequest.getHeader("Authorization");
+    log.info("authtoke",authToken);
+    String cnttype = httpServletRequest.getHeader("Content-Type");
     boolean isTokenValid = validateJwtToken(serviceAuthToken);
     if (!isTokenValid) {
       HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;

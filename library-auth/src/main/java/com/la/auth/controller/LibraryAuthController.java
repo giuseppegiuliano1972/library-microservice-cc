@@ -59,7 +59,9 @@ public class LibraryAuthController {
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
-		String jwt = jwtUtils.generateJwtToken(authentication);
+		//String jwt = jwtUtils.generateJwtToken(authentication);
+		
+		String jwt = userService.createToken();
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
 		

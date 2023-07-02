@@ -58,7 +58,7 @@ public class LendingService {
 			throw new LendingCustomException("Book not found", "BOOK_NOT_FOUND", 1);
 		}
 		
-		ResponseEntity<MemberDto> member = memberService.getMemberDetailsByCodFIscale(lendingDto.getCodFiscale());
+		ResponseEntity<MemberDto> member = memberService.getMemberDetailsByCodFIscale(lendingDto.getCodFiscale(), serviceAuthConfig.getServiceBAuthToken());
 		Date currDate = new Date();
 		if (member.getBody().getId() == null ) {
 			lend.setStatus("LEND_ERROR");
@@ -70,7 +70,7 @@ public class LendingService {
 		
 		ResponseEntity<BookDto> bookRet = bookService.setDisponibilitaLibro(book.getBody());
 		
-		ResponseEntity<Long> Long = memberService.updTotLibri(member.getBody());
+		ResponseEntity<Long> Long = memberService.updTotLibri(member.getBody(), serviceAuthConfig.getServiceBAuthToken());
 		
 		lendingDao.save(lendingAssembler.DtoToDao(lendingDto, book.getBody(), member.getBody()));
 		

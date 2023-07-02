@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.la.auth.assembler.UserAssembler;
+import com.la.auth.config.ServiceAuthConfig;
 import com.la.auth.domain.User;
 import com.la.auth.exception.AuthCustomException;
 import com.la.auth.payload.request.UserDto;
@@ -17,6 +18,9 @@ public class UserService {
 	
 	@Autowired
 	private UserAssembler userAssembler;
+	
+	@Autowired 
+	private ServiceAuthConfig serviceAuthConfig;
 	
 	public UserDto getUserByUserid(String userid, String password) {
 		
@@ -61,6 +65,12 @@ public class UserService {
 		userDao.save(dao);
 		
 		
+	}
+	
+	public String createToken() {
+		String serviceBGreetingResponse = serviceAuthConfig.getServiceBAuthToken();
+
+	    return serviceBGreetingResponse;
 	}
 
 }
