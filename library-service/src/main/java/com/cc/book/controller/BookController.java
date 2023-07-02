@@ -66,7 +66,6 @@ public class BookController {
 	  public List<BookDto> getLibroByTitolo(@PathVariable("titolo") String titolo) {
 			
 			List<BookDto> book = bookService.getBookByTitoloLike(titolo);
-			log.info("qui: " + book.toString());
 			return book;
     	}
 	  
