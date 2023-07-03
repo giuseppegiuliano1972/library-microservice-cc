@@ -1,0 +1,25 @@
+p {
+    font-family: Lato;
+  }
+  
+  menu-space {
+    flex: 5 5 auto;
+  }
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+  mat-toolbar {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3.5rem;
+    width: 100%;
+    background-color: lightgrey;
+  }

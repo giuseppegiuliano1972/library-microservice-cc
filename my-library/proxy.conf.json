@@ -1,0 +1,21 @@
+{
+   
+
+    "/member/*": {
+        "target": "http://localhost:8082",
+        "secure": false,
+        "logLevel": "debug"
+    },
+
+    "/prestito/*": {
+        "target": "http://localhost:8083",
+        "secure": false,
+        "logLevel": "debug"
+    },
+
+    "/auth/*": {
+        "target": "http://localhost:8084",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

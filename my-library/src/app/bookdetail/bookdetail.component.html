@@ -1,0 +1,26 @@
+<form [formGroup]="borrowForm">
+<div>
+    <div class="div-desc">Titolo: </div><span>{{book.TITOLO}}</span>
+    <div class="div-desc">Autore: </div><span>{{book.AUTORE}}</span> 
+    <div class="div-desc">Return date: </div>
+    <span>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" formControlName="lendDate" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker panelClass="datepickerTwo"></mat-datepicker>
+          </mat-form-field>
+    </span>
+    <div class="div-desc">Member: </div>
+    <span>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Member" aria-label="Member" [matAutocomplete]="auto" [formControl]="memberCtrl">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+          <mat-option *ngFor="let member of members | async" [value]="member">
+           <span>{{ member.COGNOME }} {{ member.NOME }}</span>
+           </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </span>
+<button (click)="borrowBook()">Borrow</button>
+</div>
+</form>

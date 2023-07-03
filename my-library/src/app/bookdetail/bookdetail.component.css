@@ -1,0 +1,17 @@
+.div-desc {
+    font-size:12px;
+    font-weight: bold  ;   
+    color: blue; 
+  }
+
+  .mat-datepicker-toggle{
+    background: blueviolet;
+  }
+  
+  ::ng-deep .datepickerTwo {
+    background:lightblue;
+  }
+  
+  ::ng-deep .datepickerTwo .mat-calendar-body-today:not(.mat-calendar-body-selected){
+    border-color:darkblue;
+  }

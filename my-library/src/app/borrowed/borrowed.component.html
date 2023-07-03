@@ -1,0 +1,15 @@
+<div class="divTable">
+        <div class="divRow">
+            <div class="divCell">Titolo</div>
+            <div class="divCell">Borrowed by</div>
+            <div class="divCell">ID card</div>
+        </div>
+        <div *ngFor="let  lend of lending">
+            <div class="divRow">
+                <div class="divCell">{{lend.TITOLO}}</div>
+                <div class="divCell">{{lend.COGNOME_MEMBER}} {{lend.NOME_MEMBER}}  </div>
+                <div class="divCell">{{lend.ID_CARD}}  </div>
+            </div>
+    
+        </div>
+</div>   

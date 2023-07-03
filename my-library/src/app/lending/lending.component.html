@@ -1,0 +1,8 @@
+<form (ngSubmit)="saveBook()">
+<li *ngFor="let lend of lending">
+<span><input type="checkbox" id="chk" value="lend.BOOK_ID"></span>
+    <span>{{lend.TITOLO}} {{lend.BOOK_ID}}</span>
+</li>
+
+<button type="submit">Click</button>
+</form>

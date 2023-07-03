@@ -1,0 +1,17 @@
+<form [formGroup]="borrowForm">
+    <div>
+        <div class="div-desc">Titolo: </div><span>{{book.TITOLO}}</span>
+        <div class="div-desc">Autore: </div><span>{{book.AUTORE}}</span> 
+        <div class="div-desc">Return date: </div>
+        <span>
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker" formControlName="returnDate" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker panelClass="datepickerTwo"></mat-datepicker>
+              </mat-form-field>
+        </span>
+       
+    <button (click)="returnBook()">Return book</button>
+    </div>
+    </form>
+    

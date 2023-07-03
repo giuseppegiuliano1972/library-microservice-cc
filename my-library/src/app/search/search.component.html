@@ -1,0 +1,26 @@
+<label for="cerca">Search: </label>
+<input type="search" name="cerca" [(ngModel)]="search">
+
+<div class="divTable">
+    <div class="divRow">
+        <div class="divCell">Titolo</div>
+        <div class="divCell">Autore</div>
+        <div class="divCell">Disponibile/Non disponibile</div>
+    </div>
+    <div *ngFor="let f of (books | filter:search) as book">
+        <div class="divRow">
+            <div class="divCell">{{f.TITOLO}}</div>
+            <div class="divCell">{{f.AUTORE}}</div>
+            <div class="divCell">
+                <div *ngIf="f.DISPONIBILE"><button type="button button2" class="btn btn-default" (click)="showDetail(f.BOOK_ID)">Borrow</button></div>
+                <div *ngIf="!f.DISPONIBILE"><button type="button button2" class="btn btn-default" (click)="showDetailReturn(f.BOOK_ID)">Return book</button></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="(books | filter:search).length < 1">
+    Not Found
+</div>
+
