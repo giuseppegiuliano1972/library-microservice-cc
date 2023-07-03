@@ -20,17 +20,6 @@ public class LibraryAuthApplication {
 		SpringApplication.run(LibraryAuthApplication.class, args);
 	}
 	
-//	@Bean
-//	public FilterRegistrationBean<AuthTokenFilter> authFilter(){
-//	    FilterRegistrationBean<AuthTokenFilter> registrationBean 
-//	      = new FilterRegistrationBean<>();
-//	        
-//	    registrationBean.setFilter(new AuthTokenFilter());
-//	    registrationBean.addUrlPatterns("/auth/*");
-//	    registrationBean.setOrder(2);
-//	        
-//	    return registrationBean;    
-//	}
 	
 	@Bean
 	public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {

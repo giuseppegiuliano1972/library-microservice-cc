@@ -104,9 +104,9 @@ public class MemberController {
         );
 	}
 	
-	@GetMapping(value = "/getgreet")
-	  public ResponseEntity sayGreeting() {
-	    return ResponseEntity.ok("Hello There from Service B!!!");
-	  }
+//	@GetMapping(value = "/getgreet")
+//	  public ResponseEntity sayGreeting() {
+//	    return ResponseEntity.ok("Hello There from Service B!!!");
+//	  }
 
 }

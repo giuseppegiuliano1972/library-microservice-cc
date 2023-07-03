@@ -45,18 +45,17 @@ public class ServiceAuthFilter implements Filter {
     log.info("authtoke",authToken);
     String cnttype = httpServletRequest.getHeader("Content-Type");
     boolean isTokenValid = validateJwtToken(serviceAuthToken);
-    if (!isTokenValid) {
-      HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
-      httpServletResponse.setStatus(401);
-      httpServletResponse.getWriter().write("INVALID_TOKEN");
-    } else {
+//    if (!isTokenValid) {
+//      HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+//      httpServletResponse.setStatus(401);
+//      httpServletResponse.getWriter().write("INVALID_TOKEN");
+//    } else {
       filterChain.doFilter(servletRequest, servletResponse);
-    }
+//    }
   }
 
   /*
-   Validate the token by comparing the secret key in it against list 
-    of secret keys registered in service B
+   Validate the token
   */
   private boolean validateJwtToken(String jwtToken) {
     if (StringUtils.isEmpty(jwtToken)) {

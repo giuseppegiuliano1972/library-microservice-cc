@@ -102,16 +102,17 @@ public class LibraryLendingController {
         );
     }
 	
-	@GetMapping(value = "/get-greeting-from-service-b")
-	  public ResponseEntity<Object> getGreetingFromServiceB(@RequestHeader("Authorization") String bearerToken) {
-	    try {
-	      log.info("TOK:",bearerToken);      
-	      String ret = lendingService.getGreetings();
-	      return ResponseHandler.generateResponse("Successfully updated data!", HttpStatus.OK, ret);
-	    } catch (Exception e) {
-			return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
-		}
-	  }
+	//Method to test token
+//	@GetMapping(value = "/get-greeting-from-service-b")
+//	  public ResponseEntity<Object> getGreetingFromServiceB(@RequestHeader("Authorization") String bearerToken) {
+//	    try {
+//	      log.info("TOK:",bearerToken);      
+//	      String ret = lendingService.getGreetings();
+//	      return ResponseHandler.generateResponse("Successfully updated data!", HttpStatus.OK, ret);
+//	    } catch (Exception e) {
+//			return ResponseHandler.generateResponse(e.getMessage(), HttpStatus.MULTI_STATUS, null);
+//		}
+//	  }
 	
 
 }

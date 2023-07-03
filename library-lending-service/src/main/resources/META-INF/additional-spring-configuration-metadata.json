@@ -43,5 +43,15 @@
     "name": "app.ct.client.bookservice.url",
     "type": "java.lang.String",
     "description": "A description for 'app.ct.client.bookservice.url'"
+  },
+  {
+    "name": "app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'app.jwtExpirationMs'"
+  },
+  {
+    "name": "app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'app.jwtSecret'"
   }
 ]}

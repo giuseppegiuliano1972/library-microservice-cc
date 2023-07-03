@@ -31,10 +31,6 @@ public class BookController {
 	@GetMapping("/{id}")
     public ResponseEntity<BookDto> getBookById(@PathVariable("id") Long bookId) {
 
-        log.info("ProductController | getProductById is called");
-
-        log.info("ProductController | getProductById | bookId : " + bookId);
-
         BookDto dtoResp
                 = bookService.getBookById(bookId);
         
@@ -54,9 +50,8 @@ public class BookController {
 	  @PostMapping("/add")
 	  public ResponseEntity<Long> addBook(@RequestBody BookDto book) {
 
-	        log.info("ProductController | addProduct is called");
 
-	        log.info("ProductController | addProduct | productRequest : " + book.toString());
+	        log.info("add : " + book.toString());
 
 	        Long bookId = bookService.addBook(book);
 	        return new ResponseEntity<>(bookId, HttpStatus.CREATED);
@@ -73,7 +68,6 @@ public class BookController {
 	  public ResponseEntity<List<BookDto>> getListaLibri() {
 			
 			List<BookDto> book = bookService.getListaLibriAll();
-			log.info("qui: " + book.toString());
 			
 			return new ResponseEntity<>(book, HttpStatus.OK);
 	  }
@@ -82,8 +76,6 @@ public class BookController {
 	  public ResponseEntity<BookDto> setDisponibilitaLibro(@RequestBody BookDto book) {
 			
 			BookDto dto = bookService.updateDispon(book);
-			log.info("qui: " + book.toString());
-			
 			return new ResponseEntity<>(dto, HttpStatus.OK);
 	  }
 

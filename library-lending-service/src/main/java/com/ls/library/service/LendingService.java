@@ -51,6 +51,7 @@ public class LendingService {
 		
 		LendingDto lend = new LendingDto();
 		
+		//Get the book querying by ID
 		ResponseEntity<BookDto> book = bookService.getBookById(lendingDto.getIdBook());
 		
 		if ((book.getBody().getId() == null) || (book.getBody().getDisponibile() == 0L)) {
@@ -58,7 +59,8 @@ public class LendingService {
 			throw new LendingCustomException("Book not found", "BOOK_NOT_FOUND", 1);
 		}
 		
-		ResponseEntity<MemberDto> member = memberService.getMemberDetailsByCodFIscale(lendingDto.getCodFiscale(), serviceAuthConfig.getServiceBAuthToken());
+		//Get the member querying by fiscal ID
+		ResponseEntity<MemberDto> member = memberService.getMemberDetailsByCodFIscale(lendingDto.getCodFiscale());
 		Date currDate = new Date();
 		if (member.getBody().getId() == null ) {
 			lend.setStatus("LEND_ERROR");
@@ -69,8 +71,15 @@ public class LendingService {
 		}
 		
 		ResponseEntity<BookDto> bookRet = bookService.setDisponibilitaLibro(book.getBody());
+		if (bookRet.getBody() == null) {
+			throw new LendingCustomException("Book error", "BOOK_GENERI_ERROR", 1);
+		}
+		ResponseEntity<Long> totLibri = memberService.updTotLibri(member.getBody(), serviceAuthConfig.getServiceBAuthToken());
 		
-		ResponseEntity<Long> Long = memberService.updTotLibri(member.getBody(), serviceAuthConfig.getServiceBAuthToken());
+		if (totLibri.getBody() == null || totLibri.getBody() == 0L) {
+			//revert disponibilità
+			bookRet = bookService.setDisponibilitaLibro(book.getBody());
+		}
 		
 		lendingDao.save(lendingAssembler.DtoToDao(lendingDto, book.getBody(), member.getBody()));
 		
@@ -201,39 +210,39 @@ public class LendingService {
 		
 	}
 	
-	public String getGreetings() {
-		
-		 try {
-		      String serviceBGreetingResponse =
-		    		  memberService.getGreetings(serviceAuthConfig.getServiceBAuthToken());
-
-		      return serviceBGreetingResponse;
-		      
-		      
-		    } catch (FeignException exception) { 
-		      /*
-		        Extract the error thrown from service B 
-		        and if the error is `INVALID_TOKEN`, then return 401
-		       */
-		      String error = new String(exception.responseBody().get().array());
-		      log.error("Error {}", error);
-		      if ("INVALID_TOKEN".equals(error)) {
-		        return error;
-		      }
-		      throw exception;
-		    } catch (Exception ex) { 
-		      /*
-		        Extract the error thrown from service B 
-		        and if the error is `INVALID_TOKEN`, then return 401
-		       */
-		      String error = ex.getMessage();
-		      log.error("Error {}", error);
-		      if ("INVALID_TOKEN".equals(error)) {
-		        return error;
-		      }
-		      throw ex;
-		    } 
-		
-	}
+//	public String getGreetings() {
+//		
+//		 try {
+//		      String serviceBGreetingResponse =
+//		    		  memberService.getGreetings(serviceAuthConfig.getServiceBAuthToken());
+//
+//		      return serviceBGreetingResponse;
+//		      
+//		      
+//		    } catch (FeignException exception) { 
+//		      /*
+//		        Extract the error thrown from service B 
+//		        and if the error is `INVALID_TOKEN`, then return 401
+//		       */
+//		      String error = new String(exception.responseBody().get().array());
+//		      log.error("Error {}", error);
+//		      if ("INVALID_TOKEN".equals(error)) {
+//		        return error;
+//		      }
+//		      throw exception;
+//		    } catch (Exception ex) { 
+//		      /*
+//		        Extract the error thrown from service B 
+//		        and if the error is `INVALID_TOKEN`, then return 401
+//		       */
+//		      String error = ex.getMessage();
+//		      log.error("Error {}", error);
+//		      if ("INVALID_TOKEN".equals(error)) {
+//		        return error;
+//		      }
+//		      throw ex;
+//		    } 
+//		
+//	}
 
 }

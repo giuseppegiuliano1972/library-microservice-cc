@@ -28,7 +28,7 @@ public class ServiceAuthConfig {
 
 	  /*
 	    Generate auth token which will be passed in header when calling 
-	    API of service B
+	    API of other services
 	   */
 	  @PostConstruct
 	  public void load() {
@@ -37,8 +37,6 @@ public class ServiceAuthConfig {
 
 	  /*
 	   Create JWT Token with the algorithm key (common for both the called and caller service)
-	   Service Secret key is to be generate by caller service and then shared
-	   and stored in called service yml
 	  */
 	  private String createJwtToken(String serviceSecretKey) {
 	    return JWT.create()

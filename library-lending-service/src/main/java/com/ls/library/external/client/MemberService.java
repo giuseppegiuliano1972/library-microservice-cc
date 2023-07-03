@@ -15,16 +15,17 @@ import com.ls.library.payload.request.MemberDto;
 public interface MemberService {
 	
 	@GetMapping("/member/{codFiscale}")
-    public ResponseEntity<MemberDto> getMemberDetailsByCodFIscale(@PathVariable String codFiscale, @RequestHeader("SERVICE-AUTH-TOKEN") String serviceAuthToken);
+    public ResponseEntity<MemberDto> getMemberDetailsByCodFIscale(@PathVariable String codFiscale);
 	
 	@GetMapping("/member/cerca/{id}")
     public ResponseEntity<MemberDto> getMemberDetailsById( @PathVariable Long id);
 	
+	//Only PUT and POST need to be authorized
 	@PutMapping("/member/update/totalelibri")
 	public ResponseEntity<Long> updTotLibri ( @RequestBody MemberDto member, @RequestHeader("SERVICE-AUTH-TOKEN") String serviceAuthToken);
 	
 	//test
-	@GetMapping("/member/getgreet")
-    public String getGreetings(@RequestHeader("SERVICE-AUTH-TOKEN") String serviceAuthToken);
+	//@GetMapping("/member/getgreet")
+    //public String getGreetings(@RequestHeader("SERVICE-AUTH-TOKEN") String serviceAuthToken);
 
 }
