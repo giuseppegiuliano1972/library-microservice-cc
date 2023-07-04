@@ -9,12 +9,15 @@ import com.ls.library.payload.request.BookDto;
 import com.ls.library.payload.request.LendingDto;
 import com.ls.library.payload.request.MemberDto;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class LendingAssembler {
 	
 	public LendingDto DaoToDto(Lending dao) {
 		LendingDto dto = new LendingDto();
-		
+
 		dto.setDateLending(dao.getDateLending());
 		dto.setIdBook(dao.getIdBook());
 		dto.setIdMember(dao.getIdMember());
@@ -57,7 +60,7 @@ public class LendingAssembler {
 		dao.setIdMember(member.getId());
 		dao.setReturnDate(null);
 		dao.setDueReturnDate(dto.getDueReturnDate());
-		
+		log.info("problema" + dto);
 		return dao;
 
 	}

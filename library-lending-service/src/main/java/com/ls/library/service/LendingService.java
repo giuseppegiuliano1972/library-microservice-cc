@@ -79,9 +79,10 @@ public class LendingService {
 		if (totLibri.getBody() == null || totLibri.getBody() == 0L) {
 			//revert disponibilità
 			bookRet = bookService.setDisponibilitaLibro(book.getBody());
+			log.info("problema");
 		}
 		
-		lendingDao.save(lendingAssembler.DtoToDao(lendingDto, book.getBody(), member.getBody()));
+		lend = lendingAssembler.DaoToDto(lendingDao.save(lendingAssembler.DtoToDao(lendingDto, book.getBody(), member.getBody())));
 		
 		lend.setStatus("OK");
 		return lend;
@@ -102,9 +103,10 @@ public class LendingService {
 			lend.setStatus("RETURN_ERROR");
 			throw new LendingCustomException("Book already returned", "BOOK_returned", 1);
 		} 
-		
+		log.info("ret lending: " + book.getBody().getTitolo() + " ---- " + lendingDto.getId());
 		Lending lendDao = lendingDao.findById(lendingDto.getId()).orElse(null);
-		
+		log.info("ret lending: " + book.getBody().getTitolo());
+		log.info("ret lending: " + lendDao.getId());
 		if (lendDao != null && lendDao.getReturnDate() != null) {
 			lend.setStatus("RET_ERROR");
 			throw new LendingCustomException("Book already returned", "BOOK_returned", 1);

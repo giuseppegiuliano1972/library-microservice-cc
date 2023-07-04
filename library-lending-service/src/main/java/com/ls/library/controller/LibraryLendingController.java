@@ -72,9 +72,8 @@ public class LibraryLendingController {
 	
 	@PutMapping("/libro/return")
 	public ResponseEntity<Object> updateBookReturned(@RequestBody LendingDto lendingDto) {
-		log.info("quiiiii");
-		
 		try {
+			log.info("Id return: {}", lendingDto.getIdBook());
 			lendingDto = lendingService.updateReturnBook(lendingDto);
 			return ResponseHandler.generateResponse("Successfully updated data!", HttpStatus.OK, lendingDto);
 		} catch (Exception e) {

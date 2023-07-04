@@ -97,7 +97,7 @@ public class MemberController {
 	
 	@PutMapping("/update/totalelibri")
 	public ResponseEntity<Long> updTotLibri (@RequestBody MemberDto member){
-		
+		log.info("MEMBER: " + member.toString());
 		return new ResponseEntity<>(
         		memberService.updTotLibri(member),
                 HttpStatus.OK
