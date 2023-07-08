@@ -1,0 +1,57 @@
+{"properties": [
+  {
+    "name": "app.ct.client.applicant.url",
+    "type": "java.lang.String",
+    "description": "A description for 'app.ct.client.applicant.url'"
+  },
+  {
+    "name": "app.ct.client.bookservice.url",
+    "type": "java.lang.String",
+    "description": "A description for 'app.ct.client.bookservice.url'"
+  },
+  {
+    "name": "app.ct.client.memberservice.url",
+    "type": "java.lang.String",
+    "description": "A description for 'app.ct.client.memberservice.url'"
+  },
+  {
+    "name": "service.jwtAlgorithmKey",
+    "type": "java.lang.String",
+    "description": "A description for 'service.jwtAlgorithmKey'"
+  },
+  {
+    "name": "service.serviceBSecretKey",
+    "type": "java.lang.String",
+    "description": "A description for 'service.serviceBSecretKey'"
+  },
+  {
+    "name": "service.serviceBSecretKey",
+    "type": "java.lang.String",
+    "description": "A description for 'service.serviceBSecretKey'"
+  },
+  {
+    "name": "service.jwtAlgorithmKey",
+    "type": "java.lang.String",
+    "description": "A description for 'service.jwtAlgorithmKey'"
+  },
+  {
+    "name": "service.jwtAlgorithmKey",
+    "type": "java.lang.String",
+    "description": "A description for 'service.jwtAlgorithmKey'"
+  },
+  {
+    "name": "app.ct.client.bookservice.url",
+    "type": "java.lang.String",
+    "description": "A description for 'app.ct.client.bookservice.url'"
+  },
+  {
+    "name": "app.jwtExpirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'app.jwtExpirationMs'"
+  },
+  {
+    "name": "app.jwtSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'app.jwtSecret'"
+  }
+]}
