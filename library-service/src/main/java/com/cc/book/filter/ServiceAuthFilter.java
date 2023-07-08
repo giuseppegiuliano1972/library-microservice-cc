@@ -1,4 +1,4 @@
-package com.cc.member.filter;
+package com.cc.book.filter;
 
 import java.io.IOException;
 import java.util.Enumeration;
@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.cc.member.config.ServiceAuthConfig;
+import com.cc.book.config.ServiceAuthConfig;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
