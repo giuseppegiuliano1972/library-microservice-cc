@@ -70,7 +70,7 @@ public class LendingService {
 			throw new LendingCustomException("Membership has expired", "MEMBER_EXPIRED", 3);
 		}
 		
-		ResponseEntity<BookDto> bookRet = bookService.setDisponibilitaLibro(book.getBody());
+		ResponseEntity<BookDto> bookRet = bookService.setDisponibilitaLibro(book.getBody(), serviceAuthConfig.getServiceBAuthToken());
 		if (bookRet.getBody() == null) {
 			throw new LendingCustomException("Book error", "BOOK_GENERI_ERROR", 1);
 		}
@@ -78,8 +78,7 @@ public class LendingService {
 		
 		if (totLibri.getBody() == null || totLibri.getBody() == 0L) {
 			//revert disponibilità
-			bookRet = bookService.setDisponibilitaLibro(book.getBody());
-			log.info("problema");
+			bookRet = bookService.setDisponibilitaLibro(book.getBody(), serviceAuthConfig.getServiceBAuthToken());
 		}
 		
 		lend = lendingAssembler.DaoToDto(lendingDao.save(lendingAssembler.DtoToDao(lendingDto, book.getBody(), member.getBody())));
@@ -114,7 +113,7 @@ public class LendingService {
 		
 		lendingDao.save(lendingAssembler.updateDtoToDao(lendDao));
 		
-		ResponseEntity<BookDto> bookRet = bookService.setDisponibilitaLibro(book.getBody());
+		ResponseEntity<BookDto> bookRet = bookService.setDisponibilitaLibro(book.getBody(), serviceAuthConfig.getServiceBAuthToken());
 		
 		lend.setStatus("OK");
 		return lend;

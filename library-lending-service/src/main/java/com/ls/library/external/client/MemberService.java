@@ -24,8 +24,4 @@ public interface MemberService {
 	@PutMapping("/member/update/totalelibri")
 	public ResponseEntity<Long> updTotLibri ( @RequestBody MemberDto member, @RequestHeader("SERVICE-AUTH-TOKEN") String serviceAuthToken);
 	
-	//test
-	//@GetMapping("/member/getgreet")
-    //public String getGreetings(@RequestHeader("SERVICE-AUTH-TOKEN") String serviceAuthToken);
-
 }

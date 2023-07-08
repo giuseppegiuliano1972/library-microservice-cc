@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.ls.library.payload.request.BookDto;
 
@@ -22,5 +23,5 @@ public interface BookService {
 	public ResponseEntity<List<BookDto>> getListaLibri();
 	
 	@PutMapping("/libri/update/disponibilita")
-	public ResponseEntity<BookDto> setDisponibilitaLibro(@RequestBody BookDto book);
+	public ResponseEntity<BookDto> setDisponibilitaLibro(@RequestBody BookDto book, @RequestHeader("SERVICE-AUTH-TOKEN") String serviceAuthToke);
 }
